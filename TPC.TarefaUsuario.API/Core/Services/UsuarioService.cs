@@ -18,7 +18,13 @@ namespace TPC.TarefaUsuario.API.Core.Services
 
         public Usuario Add(Usuario entity)
         {
-          
+
+            var retorno = _usuarioRepository.Find(d=> d.Email == entity.Email);
+            if (retorno != null)
+            {
+                throw new ArgumentException("Já existe usuário cadastrado com o email.");
+            }
+
                 return _usuarioRepository.Add(entity);
 
         }
